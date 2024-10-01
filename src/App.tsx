@@ -1,5 +1,5 @@
 import Header from './components/Cabecalho'
-import Hero from './components/Hero'
+import { Hero } from './components/Hero/HeroStyled'
 import ListaVagas from './containers/ListaVagas'
 
 import './global.css'
