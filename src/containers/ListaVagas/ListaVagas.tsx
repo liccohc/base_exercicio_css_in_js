@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import FormVagas from '../../components/FormVagas'
-import Vaga from '../../components/Vaga/Vaga.tsx'
+import Vaga from '../../components/Vaga/Vaga'
 import styled from 'styled-components'
 
 // Estilos usando styled-components
