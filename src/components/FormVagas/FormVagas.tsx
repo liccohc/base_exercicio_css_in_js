@@ -1,10 +1,10 @@
-import styled from 'styled-components'
 import { FormEvent, useState } from 'react'
+import styled from 'styled-components'
 
 const FormStyled = styled.form`
   display: grid;
   grid-template-columns: 1fr auto;
-  background-color: var(--cor-secundaria);
+  background-color: ${({ theme }) => theme.corSecundaria};
   padding: 32px;
   border-radius: 12px;
   margin-top: 40px;
@@ -12,16 +12,16 @@ const FormStyled = styled.form`
 
 const InputStyled = styled.input`
   padding: 0 16px;
-  outline-color: var(--cor-principal);
+  outline-color: ${({ theme }) => theme.corPrincipal};
 `
 
 const ButtonStyled = styled.button`
-  background-color: var(--cor-principal);
-  border: 1px solid var(--cor-principal);
+  background-color: ${({ theme }) => theme.corPrincipal};
+  border: 1px solid ${({ theme }) => theme.corPrincipal};
   height: 40px;
   padding: 0 16px;
   font-size: 18px;
-  color: var(--cor-secundaria);
+  color: ${({ theme }) => theme.corSecundaria};
   margin-left: 8px;
   cursor: pointer;
 `
