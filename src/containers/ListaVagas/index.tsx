@@ -1,9 +1,26 @@
 import { useState } from 'react'
 import FormVagas from '../../components/FormVagas'
-import Vaga from '../../components/Vaga'
+import Vaga from '../../components/Vaga/Vaga.tsx'
 import styled from 'styled-components'
 
-type VagaProps = {
+// Estilos usando styled-components
+const ListaContainer = styled.div`
+  margin-top: 32px;
+`
+
+const VagasList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
+  row-gap: 16px;
+  margin-top: 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+type VagaType = {
   id: string
   titulo: string
   localizacao: string
@@ -14,7 +31,7 @@ type VagaProps = {
   requisitos: string[]
 }
 
-const vagas = [
+const vagas: VagaType[] = [
   {
     id: '1',
     titulo: 'Desenvolvedor front-end',
@@ -90,47 +107,34 @@ const vagas = [
 const ListaVagas = () => {
   const [filtro, setFiltro] = useState<string>('')
 
-  const vagasFiltradas = vagas.filter(
-    (x) => x.titulo.toLocaleLowerCase().search(filtro) >= 0
-  )
+  const handlePesquisar = (termo: string) => {
+    setFiltro(termo)
+  }
 
   return (
-    <Container>
-      <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-      <VagasGrid>
-        {vagasFiltradas.map((vaga) => (
-          <Vaga
-            key={vaga.id}
-            titulo={vaga.titulo}
-            localizacao={vaga.localizacao}
-            nivel={vaga.nivel}
-            modalidade={vaga.modalidade}
-            salarioMin={vaga.salarioMin}
-            salarioMax={vaga.salarioMax}
-            requisitos={vaga.requisitos}
-          />
-        ))}
-      </VagasGrid>
-    </Container>
+    <ListaContainer>
+      <FormVagas aoPesquisar={handlePesquisar} />{' '}
+      {/* Passando a função aoPesquisar */}
+      <VagasList>
+        {vagas
+          .filter((vaga) =>
+            vaga.titulo.toLowerCase().includes(filtro.toLowerCase())
+          )
+          .map((vaga) => (
+            <Vaga
+              key={vaga.id}
+              titulo={vaga.titulo}
+              localizacao={vaga.localizacao}
+              nivel={vaga.nivel}
+              modalidade={vaga.modalidade}
+              salarioMin={vaga.salarioMin}
+              salarioMax={vaga.salarioMax}
+              requisitos={vaga.requisitos}
+            />
+          ))}
+      </VagasList>
+    </ListaContainer>
   )
 }
 
 export default ListaVagas
-
-const Container = styled.div`
-  margin: 0 auto;
-  padding: 16px;
-  max-width: 1200px;
-`
-
-const VagasGrid = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 16px;
-  row-gap: 16px;
-  margin-top: 32px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`
