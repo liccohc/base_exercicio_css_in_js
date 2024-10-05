@@ -1,3 +1,1 @@
-import Vaga from './Vaga'
-
-export default Vaga
+export { default } from './Vaga'
