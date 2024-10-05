@@ -1,1 +1,1 @@
-import { Hero } from './HeroStyled'
+export { default } from './Hero'
